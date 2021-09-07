@@ -2,97 +2,74 @@
 <html lang="ja">
 <head>
   <title>Firebase Authentication sample 02</title>
-  <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <!-- The surrounding HTML is left untouched by FirebaseUI.Your app may use that space for branding, controls and other customizations.-->
-  <h1>Welcome to My Awesome App</h1>
-  <div id="firebaseui-auth-container"></div>
-  <div id="loader">Loading...</div>
-    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+  <h1>Firebase Authenction Sample 02</h1>
+  <div id="auth"></div>
+  <script src="/__/firebase/7.16.0/firebase-app.js"></script> 
+  <script src="/__/firebase/7.16.0/firebase-auth.js"></script> 
+  <script src="/__/firebase/init.js"></script> 
+  <script type="text/javascript">
 
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+  /*
+  Firebase Authentcation を使った認証サンプル 02
+  Google認証用のオブジェクトを生成
+  認証用の関数「signIn」を定義
+  サインアウト 用の関数「signOut」を定義
+  認証の状態をチェックして、「サインイン」「サインアウト 」のボタンを出し分ける
+  */
 
-    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
-    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-analytics.js"></script>
+  const provider = new firebase.auth.GoogleAuthProvider();
 
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+  function signIn() {
+  firebase.auth().signInWithPopup(provider)
+  .then(result => {
+      console.log('ログインしました。');
 
-    <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-    
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyCJVJ8N1QZe6rmnczBDTLe7jI_6mmFGuCk",
-        authDomain: "login-test-b09e3.firebaseapp.com",
-        projectId: "login-test-b09e3",
-        storageBucket: "login-test-b09e3.appspot.com",
-        messagingSenderId: "179784899863",
-        appId: "1:179784899863:web:c2116ddaef6bfc7c89ab52"
-      };
-    
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-    </script>
+  }).catch(error => {
+        const signinError = `
+        サインインエラー
+        エラーメッセージ： ${error.message}
+        エラーコード: ${error.code}
+        `
+  　　　console.log(signinError);
+  });
+  }
 
-    <script>
-
-
-      ui.start('#firebaseui-auth-container', {
-        signInOptions: [
-          // List of OAuth providers supported.
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-          //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-          //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-          //firebase.auth.GithubAuthProvider.PROVIDER_ID
-        ],
-        // Other config options...
+  function signOut() {
+  firebase.auth().onAuthStateChanged(user => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        console.log('ログアウトしました');
+        location.reload();
+      })
+      .catch((error) => {
+        console.log(`ログアウト時にエラーが発生しました (${error})`);
       });
-      // Initialize the FirebaseUI Widget using Firebase.
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  });
+  }
 
-      var uiConfig = {
-        callbacks: {
-          signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-            // User successfully signed in.
-            // Return type determines whether we continue the redirect automatically
-            // or whether we leave that to developer to handle.
-            return true;
-          },
-          uiShown: function() {
-            // The widget is rendered.
-            // Hide the loader.
-            document.getElementById('loader').style.display = 'none';
-          }
-        },
-        // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-        signInFlow: 'popup',
-        signInSuccessUrl: '<url-to-redirect-to-on-success>',
-        signInOptions: [
-          // Leave the lines as is for the providers you want to offer your users.
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-          //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-          //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-          //firebase.auth.GithubAuthProvider.PROVIDER_ID,
-          //firebase.auth.EmailAuthProvider.PROVIDER_ID,
-          //firebase.auth.PhoneAuthProvider.PROVIDER_ID
-        ],
-        // Terms of service url.
-        tosUrl: '<your-tos-url>',
-        // Privacy policy url.
-        privacyPolicyUrl: '<your-privacy-policy-url>'
-      };
-      // The start method will wait until the DOM is loaded.
-      ui.start('#firebaseui-auth-container', uiConfig);
-    </script>
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        const signOutMessage = `
+        <p>Hello, ${user.displayName}!<\/p>
+        <button class="btn btn-primary" type="submit"  onClick="signOut()">サインアウト<\/button>
+        `;
+        document.getElementById('auth').innerHTML =  signOutMessage;
+        console.log('ログインしています');
+
+    } else {
+          const signInMessage = `
+          <button class="btn btn-primary" type="submit"  onClick="signIn()">サインイン<\/button>
+          `;
+          document.getElementById('auth').innerHTML = signInMessage;       
+    }
+  });
+
+  </script>
 </body>
 </html>
-
-
