@@ -32,9 +32,36 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.css" />
 </head>
 
-<body style="width:80%; margin: auto;">
-    <div id="container" style="width:30%; float: right;">
+<body>
+    <div id="container">
         <h3>FirebaseUI Demo</h3>
+        <form
+            action="https://script.google.com/macros/s/AKfycbzAq_v_X4H-QAxLr0MUq0zt5UY2IONyvSdZ8RG0hV7r7A3Rgl214OIYpEU5wiAKt6np/exec"
+            method="POST">
+            <div id="name"></div>
+            <div id="email"></div>
+            <div id="uid"></div>
+            <div class="form-group ">
+                <label for="name">名前</label>
+                <input type="text" id="name" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email">メールアドレス</label>
+                <input type="text" id="email" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="radio" id="sex0" name="sex" value="0" checked><label for="sex0">選択しない</label>
+                <input type="radio" id="sex1" name="sex" value="1"><label for="sex1">男</label>
+                <input type="radio" id="sex2" name="sex" value="2"><label for="sex2">女</label>
+            </div>
+            <div class="form-group">
+                <label for="age">年齢</label>
+                <input type="text" id="age" name="age" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="送信する" class="btn btn-primary">
+            </div>
+        </form>
         <div id="loading">Loading...</div>
         <div id="loaded" class="hidden">
           <div id="main">
@@ -95,36 +122,6 @@
             </div>
           </div>
         </div>
-    </div>
-
-
-
-
-    <div class="container" style="width:70%; float: left;">
-        <form
-            action="https://script.google.com/macros/s/AKfycbzAq_v_X4H-QAxLr0MUq0zt5UY2IONyvSdZ8RG0hV7r7A3Rgl214OIYpEU5wiAKt6np/exec"
-            method="POST">
-            <div class="form-group ">
-                <label for="name">名前</label>
-                <input type="text" id="name" name="name" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="email">メールアドレス</label>
-                <input type="text" id="email" name="email" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="radio" id="sex0" name="sex" value="0" checked><label for="sex0">選択しない</label>
-                <input type="radio" id="sex1" name="sex" value="1"><label for="sex1">男</label>
-                <input type="radio" id="sex2" name="sex" value="2"><label for="sex2">女</label>
-            </div>
-            <div class="form-group">
-                <label for="age">年齢</label>
-                <input type="text" id="age" name="age" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="送信する" class="btn btn-primary">
-            </div>
-        </form>
     </div>
     <script src="app.js"></script>
 </body>
