@@ -134,7 +134,7 @@
     document.getElementById('user-signed-in').style.display = 'block';
     document.getElementById('user-signed-out').style.display = 'none';
     document.getElementById('name').textContent = user.displayName;
-    document.getElementById('name1').textContent = user.displayName;
+    document.getElementById('form-name').textContent = '<input name="example" value="'+user.displayName+'"></input>';
     document.getElementById('email').textContent = user.email;
     document.getElementById('uid').textContent = user.uid;
     document.getElementById('phone').textContent = user.phoneNumber;
