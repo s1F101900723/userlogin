@@ -16,19 +16,19 @@
     <script src="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.css" />
 
-    
+
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+        </script>
 
     <title>GAS API</title>
 </head>
@@ -38,50 +38,66 @@
         <h3>FirebaseUI Demo</h3>
         <div id="loading">Loading...</div>
         <div id="loaded" class="hidden">
-          <div id="main">
-            <div id="user-signed-in" class="hidden">
-              <div id="user-info">
-                <div id="name"></div>
-                <div id="uid"></div>
-              </div>
+            <div id="main">
+                <div id="user-signed-in" class="hidden">
+                    <div id="user-info">
+                        <div id="photo-container">
+                            <div id="name"></div>
+                            <div id="email"></div>
+                            <div id="uid"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <p>
+                            <button id="sign-out">Sign Out</button>
+                            <button id="delete-account">Delete account</button>
+                        </p>
+                    </div>
+                    <div id="user-signed-out" class="hidden">
+                        <h4>You are signed out.</h4>
+                        <div id="firebaseui-spa">
+                            <h5>Single Page Application mode:</h5>
+                            <div id="firebaseui-container"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
     <div class="container">
-    <form action="https://script.google.com/macros/s/AKfycbzAq_v_X4H-QAxLr0MUq0zt5UY2IONyvSdZ8RG0hV7r7A3Rgl214OIYpEU5wiAKt6np/exec" method="POST">
-        <div class="form-group ">
-            <label for="name">名前</label>
-            <input type="text" id="name" name="name" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="email">メールアドレス</label>
-            <input type="text" id="email" name="email" class="form-control">
-        </div>
-        <div class="form-group">
-            <input type="radio" id="sex0" name="sex" value="0" checked><label for="sex0">選択しない</label>
-            <input type="radio" id="sex1" name="sex" value="1"><label for="sex1">男</label>
-            <input type="radio" id="sex2" name="sex" value="2"><label for="sex2">女</label>
-        </div>
-        <div class="form-group">
-            <label for="age">年齢</label>
-            <input type="text" id="age" name="age" class="form-control">
-        </div>
-        <div class="form-group">
-            <input type="submit" value="送信する" class="btn btn-primary">
-        </div>
-    </form>
-</div>
-
+        <form
+            action="https://script.google.com/macros/s/AKfycbzAq_v_X4H-QAxLr0MUq0zt5UY2IONyvSdZ8RG0hV7r7A3Rgl214OIYpEU5wiAKt6np/exec"
+            method="POST">
+            <div class="form-group ">
+                <label for="name">名前</label>
+                <input type="text" id="name" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email">メールアドレス</label>
+                <input type="text" id="email" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="radio" id="sex0" name="sex" value="0" checked><label for="sex0">選択しない</label>
+                <input type="radio" id="sex1" name="sex" value="1"><label for="sex1">男</label>
+                <input type="radio" id="sex2" name="sex" value="2"><label for="sex2">女</label>
+            </div>
+            <div class="form-group">
+                <label for="age">年齢</label>
+                <input type="text" id="age" name="age" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="送信する" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
 <script src="app.js"></script>
 </body>
 <script>
     //GASのAPIのURL（各自変更してください。）
     const endpoint =
         "https://script.google.com/macros/s/AKfycbzAq_v_X4H-QAxLr0MUq0zt5UY2IONyvSdZ8RG0hV7r7A3Rgl214OIYpEU5wiAKt6np/exec";//WebAPIのURL
-        
-        //APIを使って非同期データを取得する
-        fetch(endpoint)
+
+    //APIを使って非同期データを取得する
+    fetch(endpoint)
         .then(response => response.json())
         /*成功した処理*/
         .then(data => {
