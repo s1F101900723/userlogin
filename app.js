@@ -131,10 +131,11 @@
    * @param {!firebase.User} user
    */
   var handleSignedInUser = function(user) {
+    var Username= user.displayName
     document.getElementById('user-signed-in').style.display = 'block';
     document.getElementById('user-signed-out').style.display = 'none';
     document.getElementById('name').textContent = user.displayName;
-    document.getElementById('form-name').textContent = "<input name="example" value=""+user.displayName+""></input>";
+    document.getElementById('form-name').textContent = "<input name='example' value='"+Username+"'></input>";
     document.getElementById('email').textContent = user.email;
     document.getElementById('uid').textContent = user.uid;
     document.getElementById('phone').textContent = user.phoneNumber;
