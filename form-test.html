@@ -37,11 +37,14 @@
         <h3>FirebaseUI Demo</h3>
         <div id="loading">Loading...</div>
         <div id="loaded" class="hidden">
-            <form name="profile"
-                action="https://script.google.com/macros/s/AKfycbw8c1fpa3_w9UrLjK-cvEJ2eSSxAEzAq604Y5NreEdqO01PHYu3HMMk3qXFG0tJvjtN/exec"
+            <form
+                action="https://script.google.com/macros/s/AKfycby_J9BtZCXt5NWg5WQduYekcpdx90w3MTtOEooqh-zR1JijPy1TIY5JX9KaUMlaFyh7/exec"
                 method="POST">
                 <div class="form-group ">
-                    <input name="form_uid" id="form-uid" value="none">
+                    <label>フォームの種類<input name="form" value="profile"></label>
+                </div>
+                <div class="form-group ">
+                    <label>uid<input name="form_uid" id="form-uid" value="none"></label>
                 </div>
                 <div class="form-group ">
                     <label>ユーザー名<input name="form_name" id="form-name" value="none"></label>
@@ -119,7 +122,7 @@
 <script>
     //GASのAPIのURL（各自変更してください。）
     const endpoint =
-        "https://script.google.com/macros/s/AKfycbw8c1fpa3_w9UrLjK-cvEJ2eSSxAEzAq604Y5NreEdqO01PHYu3HMMk3qXFG0tJvjtN/exec";//WebAPIのURL
+        "https://script.google.com/macros/s/AKfycby_J9BtZCXt5NWg5WQduYekcpdx90w3MTtOEooqh-zR1JijPy1TIY5JX9KaUMlaFyh7/exec";//WebAPIのURL
 
     //APIを使って非同期データを取得する
     fetch(endpoint)
