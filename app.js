@@ -203,6 +203,7 @@
    * disableSignUp config.
    */
   function handleConfigChange() {
+    /*
     var newRecaptchaValue = document.querySelector(
         'input[name="recaptcha"]:checked').value;
     var newEmailSignInMethodValue = document.querySelector(
@@ -218,6 +219,7 @@
         '&adminRestrictedOperationStatus=' +
         currentAdminRestrictedOperationStatus);
     // Reset the inline widget so the config changes are reflected.
+    */
     ui.reset();
     ui.start('#firebaseui-container', getUiConfig());
   }
@@ -227,10 +229,12 @@
    * Initializes the app.
    */
   var initApp = function() {
+    /*
     document.getElementById('sign-in-with-redirect').addEventListener(
         'click', signInWithRedirect);
     document.getElementById('sign-in-with-popup').addEventListener(
         'click', signInWithPopup);
+    */
     document.getElementById('sign-out').addEventListener('click', function() {
       firebase.auth().signOut();
     });
@@ -238,7 +242,7 @@
         'click', function() {
           deleteAccount();
         });
-  
+    /*
     document.getElementById('recaptcha-normal').addEventListener(
         'change', handleConfigChange);
     document.getElementById('recaptcha-invisible').addEventListener(
@@ -264,6 +268,7 @@
         'change', handleConfigChange);
     document.getElementById("admin-restricted-operation-status").checked =
         getAdminRestrictedOperationStatus();  
+    */
   };
   
   window.addEventListener('load', initApp);
