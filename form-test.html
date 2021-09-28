@@ -140,6 +140,22 @@
 
         });
 
+        $('name').keyup(checkChange(this));
+
+        function checkChange(e){
+            var old = v=$(e).find('name').val();
+            return function(){
+                v=$(e).find('name').val();
+                if(old != v){
+                    old = v;
+                    isChange = true;
+                    var b=document.getElementById('name').value;
+                    console.log(b);
+                }
+            }
+        }
+
+
     
 </script>
 
