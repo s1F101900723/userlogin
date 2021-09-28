@@ -102,12 +102,14 @@
   /**
    * @return {string} The URL of the FirebaseUI standalone widget.
    */
+  /*
   function getWidgetUrl() {
     return '/widget#recaptcha=' + getRecaptchaMode() + '&emailSignInMethod=' +
         getEmailSignInMethod() + '&disableEmailSignUpStatus=' +
         getDisableSignUpStatus() + '&adminRestrictedOperationStatus=' +
         getAdminRestrictedOperationStatus();
   }
+  */
   
   
   /**
