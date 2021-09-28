@@ -133,6 +133,17 @@
         .then(data => {
             //JSONから配列に変換
             console.log(data);
+            
+            var result = data.some((u) => u.name === ['user']);
+            if (result) {
+                console.log(result);
+            } else {
+                // データが存在しなかった時の処理
+            }
+
+
+
+
             const object = data;
             //inputタグそれぞれに取得したデータを設定
             $('input').each(function (index, element) {
