@@ -133,23 +133,12 @@
         .then(data => {
             //JSONから配列に変換
             console.log(data);
-          
+            var result = data.filter(value => value.name === 'user');
+            console.log(result);
+            var a=document.getElementById('name').value;
+            console.log(a);
 
-
-
-
-            const object = data;
-            //inputタグそれぞれに取得したデータを設定
-            $('input').each(function (index, element) {
-                if (object[0][$(element).attr('name')]) {
-                    $(element).val([object[0][$(element).attr('name')]]);
-                }
-            });
         });
-        var result = data.filter(value => value.name === 'user');
-        console.log(result);
-        var a=document.getElementById('name').value;
-        console.log(a);
 
     
 </script>
