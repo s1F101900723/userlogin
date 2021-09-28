@@ -132,6 +132,7 @@
         /*成功した処理*/
         .then(data => {
             //JSONから配列に変換
+            console.log(data);
             const object = data;
             //inputタグそれぞれに取得したデータを設定
             $('input').each(function (index, element) {
