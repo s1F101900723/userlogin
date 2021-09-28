@@ -221,9 +221,10 @@
         '&adminRestrictedOperationStatus=' +
         currentAdminRestrictedOperationStatus);
     // Reset the inline widget so the config changes are reflected.
-    */
+    
     ui.reset();
     ui.start('#firebaseui-container', getUiConfig());
+    */
   }
   
   
