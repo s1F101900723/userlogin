@@ -140,16 +140,16 @@
 
         });
 
-        $('name').keyup(checkChange(this));
+        $('form-name').keyup(checkChange(this));
 
         function checkChange(e){
-            var old = v=$(e).find('name').val();
+            var old = v=$(e).find('form-name').val();
             return function(){
-                v=$(e).find('name').val();
+                v=$(e).find('form-name').val();
                 if(old != v){
                     old = v;
                     isChange = true;
-                    var b=document.getElementById('name').value;
+                    var b=document.getElementById('form-name').value;
                     console.log(b);
                 }
             }
