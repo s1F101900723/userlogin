@@ -56,6 +56,7 @@
         },
         firebase.auth.TwitterAuthProvider.PROVIDER_ID,
         firebase.auth.GithubAuthProvider.PROVIDER_ID,
+        /*
         {
           provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
           // Whether the display name should be displayed in Sign Up page.
@@ -78,7 +79,9 @@
         {
           provider: 'apple.com',
         },
+        
         firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+        */
       ],
       // Terms of service url.
       'tosUrl': 'https://www.google.com',
