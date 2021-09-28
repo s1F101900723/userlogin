@@ -140,21 +140,6 @@
 
         });
 
-        $('form-name').keyup(checkChange(this));
-
-        function checkChange(e){
-            var old = v=$(e).find('form-name').val();
-            return function(){
-                v=$(e).find('form-name').val();
-                if(old != v){
-                    old = v;
-                    isChange = true;
-                    var b=document.getElementById('form-name').value;
-                    console.log(b);
-                }
-            }
-        }
-
 
     
 </script>
