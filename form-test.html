@@ -133,10 +133,11 @@
         .then(data => {
             //JSONから配列に変換
             console.log(data);
-            var result = data.filter(value => value.name === 'user');
+            var UserList = data[0].filter(value => value.name === 'user');
+            var AList = data[1].filter(value => value.name === 'user');
+            var QList = data[2].filter(value => value.name === 'user');
             console.log(result);
-            var a=document.getElementById('name').value;
-            console.log(a);
+
 
         });
 
