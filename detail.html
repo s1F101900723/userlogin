@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+
+    <title>GAS API</title>
+
+    <link rel="manifest" href="manifest.json">
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase.js"></script>
+    <script src="sample-config.js"></script>
+    <script src="common.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+    <!--script src="dist/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="dist/firebaseui.css" /-->
+    <script src="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/5.0.0/firebase-ui-auth.css" />
+</head>
+
+<body style="width:80%; margin: auto;">
+    <div id="detail_article"></div>
+    
+
+
+    <script>
+        //GASのAPIのURL（各自変更してください。）
+        const endpoint =
+            "https://script.google.com/macros/s/AKfycbyEXVk8PA9ZgzR2FvV0gnezs11MrX1DOmAoVH2OU6d6u5bxKOO1qKu5Vl2GECnaVAskng/exec";//WebAPIのURL
+    
+        //APIを使って非同期データを取得する
+        fetch(endpoint)
+            .then(response => response.json())
+            /*成功した処理*/
+            .then(data => {
+                //JSONから配列に変換
+                console.log(data);
+                var UserList = data[0];
+                var AList = data[1];
+                var QList = data[2];
+                //var resultQ = data[2].filter(value => value.name === 'user');
+                console.log(UserList);
+                console.log(AList);
+                console.log(QList);
+                var str=location.href;
+                var url = Number(location.search.substring(4));//idが整数の場合
+                let result = str.split("/").filter(e => Boolean(e));
+                let last_url=result[result.length - 1];
+                console.log(url);
+                console.log(last_url);
+                let htmltext = "";
+                console.log(typeof(url));
+                var resultQ = QList.filter(value => value.Qid === url);
+                console.log(resultQ);
+                var resultA = AList.filter(value => value.Qid === url);
+                console.log(resultA);
+                htmltext += '<p>質問</p>';
+                for (let i = 0; i < resultA.length; i++){
+                    htmltext += '<p>'+resultA[i].uid+'</p>';
+                }
+                document.getElementById("detail_article").innerHTML = htmltext;
+    
+            });
+    
+    
+        
+    </script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
