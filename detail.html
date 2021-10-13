@@ -43,7 +43,7 @@
                 </div>
                 <form
                     action="https://script.google.com/macros/s/AKfycbyEXVk8PA9ZgzR2FvV0gnezs11MrX1DOmAoVH2OU6d6u5bxKOO1qKu5Vl2GECnaVAskng/exec"
-                    method="POST" target="sendPhoto" id="form">
+                    method="POST" target="sendPhoto" id="form" name="AnswerForm">
                     <div class="form-group modal-body">
                         <label>フォームの種類<input name="form" value="answer"></label>
                     </div>
@@ -56,9 +56,10 @@
                     <div class="form-group modal-body">
                         <label>Aid<input name="form_Aid" id="form-Aid" value=""></label>
                     </div>
-                    <div class="form-group modal-body">
-                        <label>内容<input name="form_text" id="form_text" value="内容"></label>
+                    <div class="form_group modal-body">
+                        <label>内容<textarea name="form_text" id="form_text" value="内容"></textarea></label>
                     </div>
+                    <input type="button" value="<pre><code></code></pre>" onClick="addCode(this.value)"><!--横のエラーは気にしない（onClick）-->
                     <div class="form-group modal-footer">
                         <input type="submit" value="送信する" class="btn btn-primary btn-send">
                         <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
@@ -123,7 +124,7 @@
 
         function addCode(str)
         {
-            document.form_group.form_text.value += str;
+            document.AnswerForm.form_text.value += str;
         }
     </script>
 
