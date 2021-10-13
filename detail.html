@@ -34,10 +34,51 @@
 
 <body style="width:80%; margin: auto;">
     <div id="detail_article"></div>
-    
+    <a class="btn btn-primary" data-toggle="modal" data-target="#testModal">回答する</a>
+    <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4><div class="modal-title" id="myModalLabel">回答投稿画面</div></h4>
+                </div>
+                <form
+                    action="https://script.google.com/macros/s/AKfycbyEXVk8PA9ZgzR2FvV0gnezs11MrX1DOmAoVH2OU6d6u5bxKOO1qKu5Vl2GECnaVAskng/exec"
+                    method="POST" target="sendPhoto" id="form">
+                    <div class="form-group modal-body">
+                        <label>フォームの種類<input name="form" value="answer"></label>
+                    </div>
+                    <div class="form-group modal-body">
+                        <label>uid<input name="form_uid" id="form-uid" value="none"></label>
+                    </div>
+                    <div class="form-group modal-body">
+                        <label>Qid<input name="form_Qid" id="form-Qid" value="none"></label>
+                    </div>
+                    <div class="form-group modal-body">
+                        <label>Aid<input name="form_Aid" id="form-Aid" value=""></label>
+                    </div>
+                    <div class="form-group modal-body">
+                        <label>内容<input name="form_text" id="form_text" value="内容"></label>
+                    </div>
+                    <div class="form-group modal-footer">
+                        <input type="submit" value="送信する" class="btn btn-primary btn-send">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                    </div>
+                </form>
+                <iframe name="sendPhoto" style="width:0px;height:0px;border:0px;"></iframe>
+            </div>
+        </div>
+    </div>
 
 
     <script>
+        var str=location.href;
+        var url = Number(location.search.substring(4));//idが整数の場合
+        let result = str.split("/").filter(e => Boolean(e));
+        let last_url=result[result.length - 1];
+        console.log(url);
+        console.log(last_url);
+        document.getElementById('form-Qid').value = url;
+        
         //GASのAPIのURL（各自変更してください。）
         const endpoint =
             "https://script.google.com/macros/s/AKfycbyEXVk8PA9ZgzR2FvV0gnezs11MrX1DOmAoVH2OU6d6u5bxKOO1qKu5Vl2GECnaVAskng/exec";//WebAPIのURL
@@ -56,12 +97,7 @@
                 console.log(UserList);
                 console.log(AList);
                 console.log(QList);
-                var str=location.href;
-                var url = Number(location.search.substring(4));//idが整数の場合
-                let result = str.split("/").filter(e => Boolean(e));
-                let last_url=result[result.length - 1];
-                console.log(url);
-                console.log(last_url);
+
                 let htmltext = "";
                 console.log(typeof(url));
                 var resultQ = QList.filter(value => value.Qid === url);
@@ -77,7 +113,18 @@
             });
     
     
-        
+        const $form = $('#form')
+        $('.btn-send').on('click', evt => {
+        $form.submit()
+        $form[0].reset()
+        return false
+        })
+
+
+        function addCode(str)
+        {
+            document.form_group.form_text.value += str;
+        }
     </script>
     <script src="app.js"></script>
 
