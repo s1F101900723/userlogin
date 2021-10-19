@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="form-group modal-footer">
-                        <input type="submit" value="送信する" class="btn btn-primary btn-send">
+                        <input type="submit" value="送信する" class="btn btn-primary btn-send" data-dismiss="modal">
                         <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
                     </div>
                 </form>
@@ -124,6 +124,7 @@
             $("#form_text").val(quill.root.innerHTML);
             $form.submit()
             $form[0].reset()
+            $('#testModal').modal('hide');
             return false
         })
 
