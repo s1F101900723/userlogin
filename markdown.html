@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Welcome to HyperMD!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+
+  </head>
+  <body>
+    <div id="editor"></div>
+
+  </body>
+  <script>
+
+      ClassicEditor
+          .create( document.querySelector( '#editor' ) ,{
+            toolbar:{
+              items:[ 'bold', 'italic', 'link', 'undo', 'redo', 'numberedList', 'bulletedList', 'code', 'codeBlock'], shouldNotGroupWhenFull: true
+              }
+          })
+          .catch( error => {
+              console.error( error );
+          } );
+  </script>
+
+</html>

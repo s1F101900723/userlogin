@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -57,9 +57,10 @@
                         <label>Aid<input name="form_Aid" id="form-Aid" value=""></label>
                     </div>
                     <div class="form_group modal-body">
-                        <label>内容<textarea name="form_text" id="form_text" value="内容"></textarea></label>
+                        <label>内容<textarea name="form_text" id="form_text" value="内容"></textarea>
+                            <div id="editor">初期のエディター内テキスト</div></label>
                     </div>
-                    <input type="button" value="<pre><code></code></pre>" onClick="addCode(this.value)"><!--横のエラーは気にしない（onClick）-->
+
                     <div class="form-group modal-footer">
                         <input type="submit" value="送信する" class="btn btn-primary btn-send">
                         <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
@@ -108,6 +109,7 @@
                 htmltext += '<p>質問</p>';
                 for (let i = 0; i < resultA.length; i++){
                     htmltext += '<p>'+resultA[i].uid+'</p>';
+                    htmltext += '<p>'+resultA[i].text+'</p>';
                 }
                 document.getElementById("detail_article").innerHTML = htmltext;
     
@@ -116,16 +118,44 @@
     
         const $form = $('#form')
         $('.btn-send').on('click', evt => {
-        $form.submit()
-        $form[0].reset()
-        return false
+            $("#form_text").val(quill.root.innerHTML);
+            $form.submit()
+            $form[0].reset()
+            return false
         })
 
 
-        function addCode(str)
-        {
-            document.AnswerForm.form_text.value += str;
-        }
+    </script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+    var toolbarOptions = [
+      ['bold', 'italic', 'underline', 'strike'],
+      ['blockquote', 'code-block'],
+      ['link', 'image'],
+    
+      [{ 'header': 1 }, { 'header': 2 }],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],
+      [{ 'indent': '-1'}, { 'indent': '+1' }],
+      [{ 'direction': 'rtl' }],
+    
+      [{ 'font': [false, 'serif', 'monospace'] }],
+      [{ 'size': ['small', false, 'large', 'huge'] }],
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    
+      [{ 'color': [] }, { 'color': ['red', 'blue'] }, { 'background': [] }], 
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+    
+      ['clean']
+    ];
+    var quill = new Quill('#editor', {
+      theme: 'snow',
+      modules: {
+        toolbar: toolbarOptions
+      },
+    });
+    console.log(quill);
     </script>
 
 </body>
